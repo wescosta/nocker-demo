@@ -3,10 +3,22 @@ services:
   api:
     build: .
     ports:
-    - "8080:8080"
+      - "3000:3000"
+    volumes:
+      - api-log:/logs
     depends_on:
-    - mongo
+      - mongo
+  web:
+    build: ./web
+    ports:
+      - "8080:8080"
+    depends_on:
+      - api
   mongo:
     image: mongo
     ports:
-    - "27017:27017"
+      - "27017:27017"
+    command: mongoimport --db nocker --collection post --file data/prepopulate-data.json --jsonArray
+
+volumes:
+  api-log:
