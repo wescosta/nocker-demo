@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import log from "../utils/logger";
+import log from "./logger";
 
 mongoose.connect('mongodb://mongo:27017/nocker', { useNewUrlParser: true });
 

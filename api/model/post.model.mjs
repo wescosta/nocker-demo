@@ -1,4 +1,4 @@
-import mongoose from "../db/connection";
+import mongoose from "../utils/db.connection";
 import paginate from "mongoose-paginate-v2";
 
 const schema = new mongoose.Schema({
