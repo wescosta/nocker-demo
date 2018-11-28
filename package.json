@@ -7,8 +7,7 @@
   "main": "index.mjs",
   "scripts": {
     "prestart": "if [ ! -d node_modules ]; then npm i; fi",
-    "xstart": "node --experimental-modules index.mjs",
-    "start": "forever start --uid api --spinSleepTime 5000 --minUptime 5000 -a -l forever.log -c 'node --experimental-modules' index.mjs",
+    "start": "forever --uid api --spinSleepTime 5000 --minUptime 5000 -a -c 'node --experimental-modules' index.mjs",
     "stop": "forever stop api",
     "stopall": "forever stopall",
     "test": "npm run start && mocha api.specs.js && npm run stop"
@@ -19,7 +18,7 @@
     "express": "^4.16.4",
     "forever": "^0.15.3",
     "mongoose": "^5.3.13",
-    "mongoose-paginate": "^5.0.3",
+    "mongoose-paginate-v2": "^1.0.13",
     "multer": "^1.4.1",
     "winston": "^3.1.0"
   },

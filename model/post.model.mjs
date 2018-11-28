@@ -1,5 +1,5 @@
 import mongoose from "../db/connection";
-import paginate from "mongoose-paginate";
+import paginate from "mongoose-paginate-v2";
 
 const schema = new mongoose.Schema({
   title:    String,

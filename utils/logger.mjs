@@ -1,10 +1,11 @@
-import { createLogger, format, transports } from "winston";
+import winston from "winston";
 
-const PATH = 'logs';
+const PATH = 'logs',
+      { createLogger, format, transports } = winston;
 
-export default  winston.createLogger({
+export default createLogger({
   level: process.env.NODE_ENV === 'development' ? 'debug' : 'info',
-  format: format.combine(format.colorize(), format.json()),
+  format: format.combine(format.colorize(), format.simple()),
   transports: [
     new transports.File({ filename: `${PATH}/error.log`, level: 'error' }),
     new transports.File({ filename: `${PATH}/all.log` }),
