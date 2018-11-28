@@ -6,6 +6,8 @@ services:
       - "3000:3000"
     volumes:
       - api-log:/logs
+    links:
+      - mongo
     depends_on:
       - mongo
   web:
@@ -18,7 +20,6 @@ services:
     image: mongo
     ports:
       - "27017:27017"
-    command: mongoimport --db nocker --collection post --file data/prepopulate-data.json --jsonArray
 
 volumes:
   api-log:

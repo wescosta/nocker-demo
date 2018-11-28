@@ -1,8 +1,12 @@
-const noop = () => {}
+import log from "./logger";
 
-const handle = (res, next = noop) => (err, data) => {
-  res.status(data ? 200 : 404).json(data)
-  next()
+const handle = res => (err, data) => {
+  if (err) {
+    log.error(err)
+    res.status(505).json(err === 'object' ? err : {err})
+  }
+  else
+    res.status(data ? 200 : 404).json(data || {})
 }
 
 export default handle

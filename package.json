@@ -4,16 +4,13 @@
   "author": "Wesley Costa",
   "version": "1.0.0",
   "license": "ISC",
-  "main": "index.js",
+  "main": "index.mjs",
   "scripts": {
     "prestart": "if [ ! -d node_modules ]; then npm i; fi",
-    "start": "npm run api:start & npm run web:dev",
-    "api:start": "forever start index.js",
-    "api:stop": "forever stop index.js",
-    "web:start": "if-env NODE_ENV=production && npm run -s web:serve || npm run -s web:dev",
-    "web:build": "preact build --cwd ./web",
-    "web:serve": "npm run -s web:build && preact serve --cwd ./web",
-    "web:dev": "preact watch --cwd ./web",
+    "xstart": "node --experimental-modules index.mjs",
+    "start": "forever start --uid api --spinSleepTime 5000 --minUptime 5000 -a -l forever.log -c 'node --experimental-modules' index.mjs",
+    "stop": "forever stop api",
+    "stopall": "forever stopall",
     "test": "npm run start && mocha api.specs.js && npm run stop"
   },
   "dependencies": {
@@ -24,7 +21,6 @@
     "mongoose": "^5.3.13",
     "mongoose-paginate": "^5.0.3",
     "multer": "^1.4.1",
-    "preact-cli": "^2.2.1",
     "winston": "^3.1.0"
   },
   "devDependencies": {
