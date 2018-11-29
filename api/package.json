@@ -10,7 +10,7 @@
     "start": "forever --uid api --spinSleepTime 5000 --minUptime 5000 -a -c 'node --experimental-modules' index.mjs",
     "stop": "forever stop api",
     "stopall": "forever stopall",
-    "test": "npm run start && mocha api.specs.js && npm run stop"
+    "test": "NODE_ENV=test mocha specs/**/*.specs.js --exit -r esm"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
@@ -23,7 +23,12 @@
     "winston": "^3.1.0"
   },
   "devDependencies": {
-    "chakram": "^1.5.0",
-    "mocha": "^5.2.0"
+    "chai": "^4.2.0",
+    "esm": "^3.0.84",
+    "mocha": "^5.2.0",
+    "sinon": "^7.1.1",
+    "sinon-mongoose": "^2.2.1",
+    "superagent": "^4.0.0",
+    "supertest": "^3.3.0"
   }
 }

@@ -9,8 +9,8 @@ const schema = new mongoose.Schema({
   tags: [{ type: [String] }],
   comments: [{ author: String, body: String, date: Date }],
   date: { type: Date, default: Date.now }
-});
+}).plugin(paginate);
 
-schema.plugin(paginate);
+const model = mongoose.model('Post', schema);
 
-export default mongoose.model('Post', schema);
+export default model;
