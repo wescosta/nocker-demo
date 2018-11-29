@@ -1,25 +1,39 @@
 version: "3"
 services:
   api:
-    build: ./api
-    ports:
-      - "3000:3000"
+    build: api
     volumes:
       - api-log:/logs
-    links:
-      - mongo
     depends_on:
       - mongo
+      - proxy
+    networks:
+      - frontend
+      - backend
+
   web:
-    build: ./web
-    ports:
-      - "8080:8080"
+    build: web
     depends_on:
       - api
+      - proxy
+    networks:
+      - frontend
+
+  proxy:
+    build: proxy
+    networks:
+      - frontend
+    ports:
+      - "80:80"
+  
   mongo:
     image: mongo
-    ports:
-      - "27017:27017"
+    networks:
+      - backend
 
 volumes:
   api-log:
+
+networks:
+  frontend:
+  backend:
